@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\tile\Desktop\cmake_ex\node-addon-examples\build_with_cmake\node-addon-api\hello.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tile\AppData\Roaming\npm\node_modules\cmake-js\lib\cpp\win_delay_load_hook.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tile\Desktop\cmake_ex\node-addon-examples\build_with_cmake\node-addon-api\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6575BD52-B43B-3826-8ABE-0931BBCCC7B4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tile\Desktop\cmake_ex\node-addon-examples\build_with_cmake\node-addon-api\build\CMakeFiles\ad32e9981400dfd44bbb08416575b885\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{50EF07A2-029D-3B9B-9C03-F72D3D4C592C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

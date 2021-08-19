@@ -1,0 +1,552 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample REST API for CP9000. This demo provide the user basic authentification and ViBE CP9000 system management",
+    "version": "1.0.0",
+    "title": "Sample REST API for CP9000",
+    "contact": {
+      "name": "Tien Thanh LE",
+      "email": "tien-thanh.le@harmonicinc.com"
+    },
+    "servers": [
+      {
+        "url": "http://127.0.0.2:8001/REST_API",
+        "description": "Local developement server"
+      },
+      {
+        "url": "http://198.18.48.113:8001/REST_API",
+        "description": "Developement server"
+      }
+    ]
+  },
+  "schemes": ["http", "https"],
+  "tags": [
+    {
+      "name": "Authentification",
+      "description": "Log in with this route to get a JWT token before accessing /api route. Admin account : username: admin / password: admin"
+    },
+    {
+      "name": "User",
+      "description": "Managing user account using for authentification"
+    },
+    {
+      "name": "Ipstream",
+      "description": "Managing Ipstream from t_NCCP_ipstream"
+    }
+  ],
+  "basePath": "/REST_API",
+  "paths": {
+    "/api/controller/ipstream": {
+      "get": {
+        "tags": ["Ipstream"],
+        "summary": "Return the list of Ipstreams",
+        "description": "This route will return the list of all ipstreams in the database",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Getting all Ipstream in the NCCP structure",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ipstream"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing authentication token",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/controller/ipstream/{IpstreamId}": {
+      "get": {
+        "tags": ["Ipstream"],
+        "summary": "Return the list of a specific Ipstream",
+        "description": "This route will return the a specific Ipstream according to the id entered",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "IpstreamId",
+            "in": "path",
+            "description": "ID of Ipstream to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Getting an Ipstream in the NCCP structure",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ipstream"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing authentication token",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          },
+          "404": {
+            "description": "Ipstream not found",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Ipstream"],
+        "summary": "Modified an existed Ipstream",
+        "description": "This route will modify a specific Ipstream according to the id entered",
+        "operationId": "IpstreamId",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "ID of Ipstream to modify",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Ipstream"
+            },
+            "example": {
+              "stream_enable": "0",
+              "IP_subscribe_address": "0",
+              "UDP_subscribe_port": "0",
+              "source_IP_address": "0",
+              "FEC_enable": "0",
+              "physical_port": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully modify the Ipstream",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ipstream"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing authentication token",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          },
+          "404": {
+            "description": "Ipstream not found",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": " Log in with username and password",
+        "tags": ["Authentification"],
+        "description": "Save the task",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Using this route to log in by getting a JWT token",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Authentification"
+            },
+            "example": {
+              "username": "admin",
+              "password": "admin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Log in successfully, copy the token found in Reponse to log in",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User",
+                "Auth token": "Bearer Token",
+                "Exprired in": "ExpriredIn"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          },
+          "404": {
+            "description": "User not found in the database",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": " Log in with username and password",
+        "tags": ["Authentification"],
+        "description": "Save the task",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Using this route to register a new user who only has the role of USER",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Authentification"
+            },
+            "example": {
+              "username": "user",
+              "password": "user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Register successfully, log in to get the token needed",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied or User already existed",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "(ADMIN Only)Return the list of Usets in the database",
+        "description": "Admin can use this route to return the list of all users in the database",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Getting all Users in the database",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing authentication token or not an ADMIN",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/users/{UserId}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Return the list of Ipstreams",
+        "description": "This route will return the a specific Ipstream according to the id entered",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "description": "ID of User to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Getting the User info",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ipstream"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing authentication token or not an ADMIN",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["User"],
+        "summary": "Modified an existed User password",
+        "description": "This route will modify a specific User password according to the id entered",
+        "operationId": "UserId",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "ID of User to modify",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/User"
+            },
+            "example": {
+              "password": "new password"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully modify the User",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing authentication token or not an ADMIN",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete an existed User",
+        "description": "Delete an existed User by user's ID",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "path",
+            "description": "User's ID that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully delete the User",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Authentification": {
+      "type": "object",
+      "required": ["username", "password"],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username used for loging in"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password used for loging in"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": ["username", "hash", "salt", "role", "_id"],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username saved in the database"
+        },
+        "hash": {
+          "type": "string",
+          "description": "Hashed password saved in the database"
+        },
+        "salt": {
+          "type": "string",
+          "description": "Salt used for unhashed password saved in the database"
+        },
+        "role": {
+          "type": "string",
+          "description": "User's role saved in the database"
+        },
+        "_id": {
+          "type": "string",
+          "description": "_id saved in the database"
+        }
+      }
+    },
+    "Ipstream": {
+      "type": "object",
+      "required": [
+        "stream_enable",
+        "IP_subscribe_address",
+        "UDP_subscribe_port",
+        "source_IP_address",
+        "FEC_enable",
+        "physical_port"
+      ],
+      "properties": {
+        "stream_enable": {
+          "type": "string",
+          "description": "Component stream_enable of Ipstream"
+        },
+        "IP_subscribe_address": {
+          "type": "string",
+          "description": "Component IP_subscribe_address of Ipstream"
+        },
+        "UDP_subscribe_port": {
+          "type": "string",
+          "description": "Component UDP_subscribe_port of Ipstream"
+        },
+        "source_IP_address": {
+          "type": "string",
+          "description": "Component source_IP_address of Ipstream"
+        },
+        "FEC_enable": {
+          "type": "string",
+          "description": "Component FEC_enable of Ipstream"
+        },
+        "physical_port": {
+          "type": "string",
+          "description": "Component physical_port of Ipstream"
+        }
+      },
+      "example": {
+        "stream_enable": "0",
+        "IP_subscribe_address": "0",
+        "UDP_subscribe_port": "0",
+        "source_IP_address": "0",
+        "FEC_enable": "0",
+        "physical_port": "0"
+      }
+    },
+    "InvalidResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

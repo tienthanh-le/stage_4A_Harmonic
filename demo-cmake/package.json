@@ -1,0 +1,19 @@
+{
+  "name": "demo-cmake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "install": "cmake-js compile",
+    "test": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^4.0.0",
+    "nodemon": "^2.0.7"
+  }
+}

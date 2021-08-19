@@ -1,0 +1,4 @@
+{"username":"mockUser","hash":"mockHash","salt":"mockSalt","role":"USER","_id":"AdRY3WjPALPZsgrR"}
+{"username":"mockAdmin","hash":"mockHash","salt":"mockSalt","role":"ADMIN","_id":"QLwBlnJYCHTRGTXG"}
+{"username":"admin","hash":"acee39057b7a1e254aab094f3c3c69b785766a7285ec5fb976e890d9c2f197de617ad8368527f380016b8b33a719c8a51efdd773bb4ff2b953335264d64ca0b5","salt":"4534e99aa2ca9da84e8676b8bf7c9cf35339b35b08f8172001936dcb91c4792b","role":"ADMIN","_id":"QlURQTV8Orq9b7hU"}
+{"username":"user","hash":"26b47b3475e9dec571a39c9f3a9d070d57dbbb4cf0a925057ed47537b8a006ef0557d5f68e6966fa06b78e97868c32fd78e384bf141c7f4e6f4dd871a0c87e82","salt":"277077ad7dda8ecd5150e4cbd33bd5bae99a51c354878d113a8dfdd279ea5f91","role":"USER","_id":"vH86TSteCtnjhDOU"}

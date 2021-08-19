@@ -1,0 +1,3 @@
+C:/Users/tile/Desktop/api-app-local/build/CMakeFiles/cmake-addon.dir
+C:/Users/tile/Desktop/api-app-local/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/tile/Desktop/api-app-local/build/CMakeFiles/ZERO_CHECK.dir

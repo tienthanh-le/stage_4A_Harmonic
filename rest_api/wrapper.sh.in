@@ -1,0 +1,5 @@
+setenv NODE_PATH "@ANBASE_SYSROOT@/usr/lib/node_modules";
+setenv PATH "@ANBASE_SYSROOT@/usr/bin:${PATH}";
+setenv NODE "@ANBASE_SYSROOT@/usr/bin/node";
+setenv LD_LIBRARY_PATH "@ANBASE_SYSROOT@/usr/lib"
+eval "$*"

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/">Homepage</a></li>
+      </ul>
+    </nav>
+    <header>
+      <h1>Login using local account</h1>
+    </header>
+    <main>
+      <form action="/login" method="post">
+        <div>
+          <label>Username:</label>
+          <input type="text" name="username" />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" />
+        </div>
+        <div>
+          <input type="submit" value="Log In" />
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

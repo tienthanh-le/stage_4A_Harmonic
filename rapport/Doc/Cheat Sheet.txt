@@ -1,0 +1,75 @@
+-------------------------
+conf nginx dans /etc/nginx/nginx.conf
+/usr/sbin/nginx -s reload
+-------------------------
+
+moduless nodejs sous /local/let/node_modules/
+
+su
+/usr/bin/node --experimental-modules expressnodejs.mjs
+-------------------------
+copier sur la machine via scp
+scp expressnodejs.mjs let@10.1.8.13:/tmp/expressnodejs.mjs
+-------------------------
+
+Xming: nedit expressnodejs.mjs
+firefox
+
+-----------------------
+Centos info-check
+
+cat /etc/*elease
+
+-----------------------
+/*
+Cross compile
+*/
+-----
+srv0359:
+--
+androx86_830 (call)
+
+/home/let:
+svn co http://svn17.corp.thvnet.com/svn/Andromede/system_software/andreas9k/branches/ANDREAS9K_02.60.00.001_RESTAPI_09072021
+
+*générer tout andreas9k et l’image associée : (C/C++)
+-dans ANDREAS9K_02.60.00.001_RESTAPI_09072021/build: 
+./configure
+make install
+-Le résulatat de la compile se retrouve sous ANDREAS9K_02.60.00.001_RESTAPI_09072021/build/img
+
+*Compiler uniquement la restapi
+make restapi
+-L’install copie le résultat sous img/rest_api
+
+-----
+CP9000 (chassis 198.18.48.113)
+--
+
+- Sous ANDREAS9K_02.60.00.001_RESTAPI_09072021/build/img :
+start_boot.sh
+
+*https://198.18.48.113/REST_API/api
+Stop app ./kill_boot.sh sous ANDREAS9K_02.60.00.001_RESTAPI_09072021/build/img
+Les logs de nodejs sont sous : /data/log/andreas/restapi.log
+
+Démarrer app par nginx : 
+ANDREAS9K_02.60.00.001_RESTAPI_09072021/build/img/start-scripts/nginx
+
+-repetoire pour copier:
+/home/let/ANDREAS9K_02.60.00.001_RESTAPI_09072021/apps/rest_api/nodejs
+
+-----
+
+Si nginx bugs: 
+cd
+su -c "cp /home/let/ANDREAS9K_02.60.00.001_RESTAPI_09072021/conf/scripts/set_nginx_ip_address.sh /app/" app
+(ps -eaf | grep nginx pour verifier)
+se remettre sur ANDREAS9K_02.60.00.001_RESTAPI_09072021/build/img/rest_api et lancer par node app 
+
+Pour relanscer l’appli restapi sans relancer toute l’application : 
+recompile la rest api : make rest_api sous ANDREAS9K_02.60.00.001_RESTAPI_09072021/build (sur serveur srv0359)
+
+puis lancer node app.js sous ANDREAS9K_02.60.00.001_RESTAPI_09072021/build/apps/restapi/nodejs (sur le chassis 198.18.48.113)
+
+redémarrer le chassis : /sbin/reboot

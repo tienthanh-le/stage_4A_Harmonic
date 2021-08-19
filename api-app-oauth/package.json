@@ -1,0 +1,36 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app",
+    "test": "node test_app.js",
+    "install": "cmake-js compile"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "gypfile": true,
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "node-addon-api": "^4.0.0",
+    "passport": "^0.4.1",
+    "passport-oauth2": "^1.5.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}
